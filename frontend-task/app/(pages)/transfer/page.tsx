@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation"; // Import useRouter
 import "@solana/wallet-adapter-react-ui/styles.css";
 import {
   PublicKey,
@@ -32,6 +33,8 @@ export default function Transfer() {
   const [isLoading, setIsLoading] = useState(false);
   const [showUsdValue, setShowUsdValue] = useState(true);
   const [liveUsdValue, setLiveUsdValue] = useState("0.00");
+
+  const router = useRouter(); // Initialize useRouter
 
   const { data: solPrice, isLoading: isPriceFetching } = useQuery({
     queryKey: ["solanaPrice"],
@@ -144,6 +147,12 @@ export default function Transfer() {
           </button>
         </div>
       )}
+
+      <div className="mt-10 text-center">
+        <h1>Transfer Page</h1>
+        {/* Add a button to navigate to the home page */}
+        <Button onClick={() => router.push("/")}>Go to Home</Button>
+      </div>
 
       {/* Only show form when wallet is connected */}
       {connected ? (
